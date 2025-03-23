@@ -18,7 +18,8 @@
     
     <!-- Software Platform -->
     <rect x="250" y="120" width="220" height="180" rx="10" ry="10" fill="#0066cc" />
-    <text x="360" y="180" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Software-Defined NI Platform</text>
+    <text x="360" y="160" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Software-Defined</text>
+     <text x="360" y="180" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">NI Platform</text>
     
     <!-- Software Components - with taller boxes and line breaks for text -->
     <rect x="270" y="200" width="80" height="50" fill="white" rx="5" ry="5" />
