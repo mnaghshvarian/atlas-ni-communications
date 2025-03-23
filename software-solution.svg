@@ -17,12 +17,12 @@
     <text x="625" y="305" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Network Switch</text>
     
     <!-- Software Platform -->
-    <rect x="230" y="150" width="240" height="150" rx="10" ry="10" fill="#0066cc" />
+    <rect x="250" y="150" width="220" height="150" rx="10" ry="10" fill="#0066cc" />
     <text x="360" y="180" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Software-Defined NI Platform</text>
     
     <!-- Software Components -->
     <rect x="270" y="200" width="80" height="40" fill="white" rx="5" ry="5" />
-    <text x="310" y="223" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">Signal Processing</text>
+    <text x="310" y="223" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">Signal \n Processing</text>
     
     <rect x="270" y="250" width="80" height="40" fill="white" rx="5" ry="5" />
     <text x="310" y="273" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">NI Algorithms</text>
