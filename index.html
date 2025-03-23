@@ -1248,7 +1248,7 @@
                         </div>
                         <!-- Google reCAPTCHA -->
                         <div class="form-group">
-                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                            <div class="g-recaptcha" data-sitekey="6LfPQPQqAAAAHSdNGqhF3LAk1YbEH9qgeOiqpsJ"></div>
                             <small>Please complete the CAPTCHA to verify you're not a robot.</small>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
@@ -1474,13 +1474,16 @@
             }
             
             // Check reCAPTCHA
-            const recaptcha = document.querySelector('textarea[name="g-recaptcha-response"]');
-            if (!recaptcha || recaptcha.value === '') {
-                formMessage.textContent = 'Please complete the reCAPTCHA verification.';
-                formMessage.className = 'form-message form-error';
-                formMessage.style.display = 'block';
-                return false;
-            }
+    // Get the reCAPTCHA response
+    const recaptchaResponse = grecaptcha.getResponse();
+    
+    if (!recaptchaResponse) {
+        // Show error if reCAPTCHA not completed
+        formMessage.textContent = 'Please complete the reCAPTCHA verification.';
+        formMessage.className = 'form-message form-error';
+        formMessage.style.display = 'block';
+        return false;
+    }
             
             // Submit the form using Formspree
             const formData = new FormData(form);
