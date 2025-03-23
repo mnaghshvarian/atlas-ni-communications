@@ -1174,7 +1174,7 @@
                         </div>
                         <div>
                             <span>✉️</span>
-                            <p>info@atlasnicomm.com</p>
+                            <p>info@aiatlasinc.ca</p>
                         </div>
                     </div>
                 </div>
@@ -1236,14 +1236,14 @@
                         <li><a href="#opti-net" onclick="showSolutionDetail('opti-net')">AI-OptiNet</a></li>
                         <li><a href="#software-solution" onclick="showSolutionDetail('software-solution')">Software Solutions</a></li>
                         <li><a href="#hardware-solution" onclick="showSolutionDetail('hardware-solution')">Hardware Solutions</a></li>
-                        <li><a href="#contact">Custom Integration</a></li>
+                        <li><a href="#" onclick="showCustomIntegration(); return false;">Custom Integration</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <ul>
                         <li>North York, Canada</li>
-                        <li>info@atlasnicomm.com</li>
+                        <li>info@aiatlasinc.ca</li>
                         <li>+1 (xxx) xxx-xxxx</li>
                     </ul>
                 </div>
@@ -1253,6 +1253,56 @@
             </div>
         </div>
     </footer>
+
+    <!-- Custom Integration Solution (Hidden by default) -->
+    <section id="custom-integration" class="solution-detail" style="display: none;">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Custom Integration Solutions</h2>
+            </div>
+            <div class="solution-detail-content">
+                <div class="solution-detail-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Custom Integration Solution">
+                </div>
+                <div class="solution-detail-info fade-in">
+                    <h3>Tailored Solutions for Unique Challenges</h3>
+                    <p>Every network infrastructure has its unique requirements and challenges. Our custom integration services provide bespoke solutions that perfectly align with your specific needs, ensuring optimal performance and efficiency.</p>
+                    
+                    <div class="solution-detail-features">
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon">✓</div>
+                            <div class="solution-detail-text">
+                                <h4>Needs Assessment</h4>
+                                <p>Our team of experts works closely with you to thoroughly understand your current infrastructure, challenges, and objectives, forming the foundation for a tailored solution.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon">✓</div>
+                            <div class="solution-detail-text">
+                                <h4>Hybrid Solutions</h4>
+                                <p>Combine our software and hardware offerings in a way that best suits your needs, creating a comprehensive solution that addresses all aspects of your communications infrastructure.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon">✓</div>
+                            <div class="solution-detail-text">
+                                <h4>Legacy System Integration</h4>
+                                <p>Seamlessly integrate our cutting-edge technology with your existing systems, ensuring a smooth transition and protecting your previous investments.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon">✓</div>
+                            <div class="solution-detail-text">
+                                <h4>Ongoing Support</h4>
+                                <p>Receive dedicated technical support, regular updates, and continuous optimization to ensure your custom solution evolves with your changing needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contact" class="btn">Schedule a Consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Back to top button -->
     <div class="back-to-top" id="backToTop">↑</div>
@@ -1313,11 +1363,21 @@
             return false; // Prevent default link behavior
         }
         
+        // Show Custom Integration
+        function showCustomIntegration() {
+            showSolutionDetail('custom-integration');
+            return false;
+        }
+        
         // Check URL for solution detail on page load
         window.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash;
-            if (hash && (hash === '#opti-net' || hash === '#software-solution' || hash === '#hardware-solution')) {
-                showSolutionDetail(hash.substring(1));
+            if (hash) {
+                const solutionIds = ['opti-net', 'software-solution', 'hardware-solution', 'custom-integration'];
+                const solutionId = hash.substring(1);
+                if (solutionIds.includes(solutionId)) {
+                    showSolutionDetail(solutionId);
+                }
             }
         });
         
@@ -1362,35 +1422,85 @@
             //     return false;
             // }
             
-            // Submit form using Formspree (uncomment when you have the actual endpoint)
-            // const formData = new FormData(form);
-            // fetch(form.action, {
-            //     method: 'POST',
-            //     body: formData,
-            //     headers: {
-            //         'Accept': 'application/json'
-            //     }
-            // })
-            // .then(response => {
-            //     if (response.ok) {
-            //         formSuccess.style.display = 'block';
-            //         form.reset();
-            //         grecaptcha.reset();
-            //     } else {
-            //         throw new Error('Form submission failed');
-            //     }
-            // })
-            // .catch(error => {
-            //     formError.style.display = 'block';
-            //     console.error(error);
-            // });
+            // Form destination
+            form.action = "https://formspree.io/f/info@aiatlasinc.ca";
             
-            // For demonstration purposes (remove this in actual implementation)
-            formSuccess.style.display = 'block';
-            form.reset();
+            // Submit form using Formspree (uncomment when you have the actual endpoint)
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    formSuccess.style.display = 'block';
+                    form.reset();
+                    if (typeof grecaptcha !== 'undefined') {
+                        grecaptcha.reset();
+                    }
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            })
+            .catch(error => {
+                formError.style.display = 'block';
+                console.error(error);
+            });
             
             return false; // Prevent default form submission
         }
+        
+        // API Interaction for Team Photos (load dynamically)
+        function loadTeamPhotos() {
+            const teamMembers = [
+                {
+                    name: "Dr. Mark Persaud",
+                    photo: "team/mark-persaud.jpg",
+                    fallback: "https://via.placeholder.com/150"
+                },
+                {
+                    name: "Prof. Shiva Kumar",
+                    photo: "team/shiva-kumar.jpg",
+                    fallback: "https://via.placeholder.com/150"
+                },
+                {
+                    name: "Dr. Mahdi Naghshvarianjahromi",
+                    photo: "team/mahdi-naghshvarian.jpg",
+                    fallback: "https://via.placeholder.com/150"
+                },
+                {
+                    name: "Prof. Jamal Deen",
+                    photo: "team/jamal-deen.jpg",
+                    fallback: "https://via.placeholder.com/150"
+                }
+            ];
+            
+            // Get all team member images
+            const teamImages = document.querySelectorAll('.member-image img');
+            
+            // Load team photos
+            teamImages.forEach((img, index) => {
+                if (index < teamMembers.length) {
+                    const member = teamMembers[index];
+                    
+                    // Try to load the team photo
+                    const testImg = new Image();
+                    testImg.onload = function() {
+                        img.src = member.photo;
+                    };
+                    testImg.onerror = function() {
+                        img.src = member.fallback;
+                    };
+                    testImg.src = member.photo;
+                }
+            });
+        }
+        
+        // Call the function when the page loads
+        window.addEventListener('DOMContentLoaded', loadTeamPhotos);
     </script>
 </body>
 </html>
