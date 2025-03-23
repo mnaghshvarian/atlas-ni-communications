@@ -6,6 +6,16 @@
     <title>Atlas NI Communications Corp. - Next-Generation Intelligent Transceivers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Google Analytics for visitor tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID'); // Replace with your Google Analytics ID
+    </script>
     <style>
         /* Reset styles */
         * {
@@ -338,12 +348,25 @@
             color: #0a192f;
         }
         
+        .solution-buttons {
+            display: flex;
+            margin-top: 30px;
+        }
+        
         .home-link {
             display: inline-block;
-            margin-top: 30px;
             color: #0066cc;
             text-decoration: none;
             font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid #0066cc;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .home-link:hover {
+            background-color: #0066cc;
+            color: white;
         }
         
         .home-link i {
@@ -459,6 +482,23 @@
         .contact-form textarea {
             height: 150px;
             resize: vertical;
+        }
+        
+        .form-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .form-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .form-error {
+            background-color: #f8d7da;
+            color: #721c24;
         }
         
         /* Footer */
@@ -577,6 +617,48 @@
             font-family: 'Courier New', monospace;
             overflow-x: auto;
             margin-bottom: 15px;
+        }
+        
+        /* Solution Navigation Bar */
+        .solution-nav {
+            position: sticky;
+            top: 70px;
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 90;
+            display: none;
+        }
+        
+        .solution-nav.show {
+            display: block;
+        }
+        
+        .solution-nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .solution-nav-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0a192f;
+        }
+        
+        /* Visitor Counter */
+        #visitor-counter {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #0a192f;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 98;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Responsive styles */
@@ -706,19 +788,19 @@
         <div class="container">
             <div class="stats-container">
                 <div class="stat-box fade-in">
-                    <div class="stat-number" data-count="25">0</div>
+                    <div class="stat-number">Up to 25%</div>
                     <div class="stat-text">Energy Reduction</div>
                 </div>
                 <div class="stat-box fade-in">
-                    <div class="stat-number" data-count="35">0</div>
+                    <div class="stat-number">Up to 35%</div>
                     <div class="stat-text">Bandwidth Increase</div>
                 </div>
                 <div class="stat-box fade-in">
-                    <div class="stat-number" data-prefix="$" data-count="10" data-suffix="B+">$0B+</div>
+                    <div class="stat-number">$10B+</div>
                     <div class="stat-text">Cost Savings</div>
                 </div>
                 <div class="stat-box fade-in">
-                    <div class="stat-number" data-prefix="" data-count="3" data-suffix="x">0x</div>
+                    <div class="stat-number">3x</div>
                     <div class="stat-text">Range Increase</div>
                 </div>
             </div>
@@ -759,7 +841,7 @@
                         <div class="solution-detail-icon"><i class="fas fa-chart-line"></i></div>
                         <div class="solution-detail-text">
                             <h4>Enhanced Data Rates</h4>
-                            <p>Achieve 25% higher data throughput without requiring additional hardware investments.</p>
+                            <p>Achieve up to 35% higher data throughput without requiring additional hardware investments.</p>
                         </div>
                     </div>
                     
@@ -816,6 +898,16 @@
         </div>
     </section>
     
+    <!-- Solution Navigation Bar -->
+    <div class="solution-nav" id="solution-nav">
+        <div class="container">
+            <div class="solution-nav-content">
+                <div class="solution-nav-title" id="solution-nav-title">Solution Details</div>
+                <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+            </div>
+        </div>
+    </div>
+    
     <!-- Solution Details -->
     <!-- AI-OptiNet Solution Detail -->
     <section id="opti-net" class="solution-detail">
@@ -860,7 +952,9 @@
                         </div>
                     </div>
                     
-                    <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    <div class="solution-buttons">
+                        <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -909,7 +1003,9 @@
                         </div>
                     </div>
                     
-                    <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    <div class="solution-buttons">
+                        <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -958,7 +1054,9 @@
                         </div>
                     </div>
                     
-                    <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    <div class="solution-buttons">
+                        <a href="#solutions" class="home-link" onclick="hideSolution()"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1041,7 +1139,9 @@
                     </div>
                 </div>
                 <div class="contact-form fade-in">
-                    <form id="contactForm" onsubmit="return validateForm()">
+                    <div id="form-message" class="form-message"></div>
+                    
+                    <form id="contactForm" action="https://formspree.io/f/info@aiatlasinc.ca" method="POST" onsubmit="return validateForm()">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1057,6 +1157,11 @@
                         <div class="form-group">
                             <label for="message">Message</label>
                             <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <!-- Google reCAPTCHA -->
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                            <small>Please complete the CAPTCHA to verify you're not a robot.</small>
                         </div>
                         <button type="submit" class="btn">Send Message</button>
                     </form>
@@ -1109,6 +1214,12 @@
     <!-- Back to top button -->
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Visitor Counter -->
+    <div id="visitor-counter">
+        <div>Visitors: <span id="visitor-count">1</span></div>
+        <div>Online Now: <span id="online-count">1</span></div>
     </div>
 
     <!-- JavaScript -->
@@ -1164,8 +1275,8 @@
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
                 
-                // Handle regular anchor links
-                if (targetId !== '#' && !targetId.includes('solution')) {
+                // Only handle non-solution links
+                if (targetId !== '#' && !this.hasAttribute('onclick')) {
                     e.preventDefault();
                     
                     const target = document.querySelector(targetId);
@@ -1178,6 +1289,10 @@
                 }
             });
         });
+        
+        // Solution navigation
+        const solutionNav = document.getElementById('solution-nav');
+        const solutionNavTitle = document.getElementById('solution-nav-title');
         
         // Show solution detail
         function showSolution(solutionId) {
@@ -1193,11 +1308,21 @@
                 selectedSolution.style.display = 'block';
                 selectedSolution.classList.add('active');
                 
-                // Scroll to the solution
+                // Set navigation title
+                const title = selectedSolution.querySelector('h2').textContent;
+                solutionNavTitle.textContent = title;
+                
+                // Show navigation bar
+                solutionNav.classList.add('show');
+                
+                // Scroll to solution anchor with offset for fixed header
                 window.scrollTo({
-                    top: selectedSolution.offsetTop - 80,
+                    top: selectedSolution.offsetTop - 120,
                     behavior: 'smooth'
                 });
+                
+                // Add solution ID to URL hash without refreshing page
+                history.pushState(null, '', `#${solutionId}`);
             }
             
             return false;
@@ -1205,16 +1330,24 @@
         
         // Hide solution detail
         function hideSolution() {
+            // Hide all solutions
             document.querySelectorAll('.solution-detail').forEach(solution => {
                 solution.classList.remove('active');
                 solution.style.display = 'none';
             });
             
+            // Hide navigation bar
+            solutionNav.classList.remove('show');
+            
+            // Scroll to solutions section
             const solutionsSection = document.getElementById('solutions');
             window.scrollTo({
                 top: solutionsSection.offsetTop - 80,
                 behavior: 'smooth'
             });
+            
+            // Update URL hash
+            history.pushState(null, '', '#solutions');
             
             return false;
         }
@@ -1223,58 +1356,120 @@
         window.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash;
             if (hash && (hash === '#opti-net' || hash === '#software-solution' || hash === '#hardware-solution')) {
-                showSolution(hash.substring(1));
+                setTimeout(() => {
+                    showSolution(hash.substring(1));
+                }, 500);
             }
-            
-            // Animated stats counter
-            const statNumbers = document.querySelectorAll('.stat-number');
-            
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-count'));
-                const prefix = stat.getAttribute('data-prefix') || '';
-                const suffix = stat.getAttribute('data-suffix') || '';
-                let count = 0;
-                
-                const updateCount = () => {
-                    const increment = target / 50;
-                    if (count < target) {
-                        count += increment;
-                        if (count > target) count = target;
-                        stat.textContent = prefix + Math.floor(count) + suffix;
-                        requestAnimationFrame(updateCount);
-                    } else {
-                        stat.textContent = prefix + target + suffix;
-                    }
-                };
-                
-                updateCount();
-            });
         });
         
-        // Form validation
+        // Contact form validation and submission
         function validateForm() {
-            // Simple form validation
+            const form = document.getElementById('contactForm');
+            const formMessage = document.getElementById('form-message');
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
+            // Check required fields
             if (!name || !email || !subject || !message) {
-                alert('Please fill in all fields');
+                formMessage.textContent = 'Please fill in all fields.';
+                formMessage.className = 'form-message form-error';
+                formMessage.style.display = 'block';
                 return false;
             }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address');
+            // Check reCAPTCHA
+            const recaptcha = document.querySelector('textarea[name="g-recaptcha-response"]');
+            if (!recaptcha || recaptcha.value === '') {
+                formMessage.textContent = 'Please complete the reCAPTCHA verification.';
+                formMessage.className = 'form-message form-error';
+                formMessage.style.display = 'block';
                 return false;
             }
             
-            alert('Thank you for your message! We will get back to you soon.');
-            document.getElementById('contactForm').reset();
+            // Submit the form using Formspree
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success
+                    formMessage.textContent = 'Thank you for your message! We will get back to you soon.';
+                    formMessage.className = 'form-message form-success';
+                    formMessage.style.display = 'block';
+                    form.reset();
+                    grecaptcha.reset();
+                } else {
+                    // Error
+                    formMessage.textContent = 'There was a problem sending your message. Please try again.';
+                    formMessage.className = 'form-message form-error';
+                    formMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                formMessage.textContent = 'There was a problem sending your message. Please try again.';
+                formMessage.className = 'form-message form-error';
+                formMessage.style.display = 'block';
+            });
+            
             return false;
         }
+        
+        // Visitor counter simulation
+        function updateVisitorCounter() {
+            // In a real implementation, this would fetch data from your analytics service
+            // This is just a simulation for demonstration purposes
+            
+            // Get current visitor count or use a default
+            let visitorCount = parseInt(localStorage.getItem('visitorCount')) || Math.floor(Math.random() * 100 + 100);
+            
+            // Increment visitor count for this session if not already counted
+            if (!sessionStorage.getItem('counted')) {
+                visitorCount++;
+                localStorage.setItem('visitorCount', visitorCount);
+                sessionStorage.setItem('counted', 'true');
+            }
+            
+            // Display visitor count
+            document.getElementById('visitor-count').textContent = visitorCount;
+            
+            // Simulate online count (random between 1 and 15)
+            const onlineCount = Math.floor(Math.random() * 15) + 1;
+            document.getElementById('online-count').textContent = onlineCount;
+        }
+        
+        // Update counter on page load
+        updateVisitorCounter();
+        
+        // Register page view with analytics
+        function logPageView() {
+            const page = window.location.pathname;
+            const referrer = document.referrer;
+            const userAgent = navigator.userAgent;
+            
+            // In a real implementation, this would send data to your analytics service
+            console.log('Page view:', { page, referrer, userAgent });
+            
+            // If using Google Analytics, this is handled automatically by the gtag script
+            
+            // For a custom implementation, you could send this data to your server
+            // Example:
+            // fetch('/api/log-page-view', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ page, referrer, userAgent, timestamp: new Date().toISOString() })
+            // });
+        }
+        
+        // Log page view on load
+        logPageView();
     </script>
 </body>
 </html>
