@@ -1,3 +1,2143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas NI Communications Corp. - Next-Generation Intelligent Transceivers</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Add Font Awesome for better icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Add Chart.js for interactive charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+        
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0a192f 0%, #0d253f 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #00c8ff;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #0a192f 0%, #0d253f 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1581091877018-dac6a371d50f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #00c8ff;
+            color: #0a192f;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background-color: #00a3cc;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #00c8ff;
+            color: #00c8ff;
+        }
+        
+        .btn-outline:hover {
+            background-color: #00c8ff;
+            color: #0a192f;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #0a192f;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: #00c8ff;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #0a192f;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        /* Solutions Section */
+        .solutions {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .solutions-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .solution-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .solution-icon {
+            background: linear-gradient(135deg, #00c8ff 0%, #0066cc 100%);
+            color: white;
+            font-size: 2rem;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .solution-info {
+            padding: 25px;
+        }
+        
+        .solution-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #0a192f;
+        }
+        
+        .solution-info p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .solution-link {
+            display: inline-block;
+            color: #0066cc;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .solution-link:after {
+            content: '→';
+            margin-left: 5px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .solution-link:hover:after {
+            margin-left: 10px;
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 30px auto 20px;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 0 20px 30px;
+        }
+        
+        .member-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: #0a192f;
+        }
+        
+        .member-info p.position {
+            color: #00c8ff;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .member-info p.bio {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #0a192f;
+        }
+        
+        .contact-info p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .contact-info .contact-details div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-info .contact-details span {
+            color: #0066cc;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #0a192f;
+            font-weight: 600;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a192f;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: #00c8ff;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: #00c8ff;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Stats container */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .stat-box {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00c8ff;
+            margin-bottom: 10px;
+        }
+        
+        .stat-text {
+            font-size: 0.9rem;
+            color: #0a192f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Technology Showcase */
+        .tech-showcase {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .tech-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .tech-image {
+            position: relative;
+        }
+        
+        .tech-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #0a192f;
+        }
+        
+        .tech-features {
+            margin-top: 30px;
+        }
+        
+        .tech-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .tech-feature-icon {
+            background-color: rgba(0, 200, 255, 0.1);
+            color: #00c8ff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .tech-feature-text h4 {
+            margin-bottom: 5px;
+            color: #0a192f;
+        }
+        
+        .tech-feature-text p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* Solution Detail Pages */
+        .solution-detail {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .solution-detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .solution-detail-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .solution-detail-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0a192f;
+        }
+        
+        .solution-detail-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .solution-detail-icon {
+            background-color: rgba(0, 200, 255, 0.1);
+            color: #00c8ff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .solution-detail-text h4 {
+            margin-bottom: 10px;
+            color: #0a192f;
+            font-size: 1.2rem;
+        }
+        
+        .solution-detail-text p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Interactive API Explorer */
+        .api-explorer {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .api-explorer h4 {
+            margin-bottom: 15px;
+            color: #0a192f;
+            font-size: 1.2rem;
+        }
+        
+        .api-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .api-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .api-tab.active {
+            border-bottom: 2px solid #00c8ff;
+            color: #00c8ff;
+            font-weight: 600;
+        }
+        
+        .api-content {
+            display: none;
+        }
+        
+        .api-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background-color: #1e1e1e;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+        
+        .endpoint-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .endpoint-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .endpoint-list li:hover {
+            background-color: #e0f0ff;
+        }
+        
+        .endpoint-list li.active {
+            background-color: #d0e8ff;
+            border-left: 3px solid #00c8ff;
+        }
+        
+        /* Data Visualization Section */
+        .data-visualization {
+            margin-top: 30px;
+        }
+        
+        .chart-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        
+        .chart-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .chart-tab {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chart-tab.active {
+            background-color: #00c8ff;
+            color: white;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00c8ff;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Form success/error messages */
+        .form-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .form-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        /* Solution navigation */
+        .solution-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .home-link i {
+            margin-right: 5px;
+        }
+        
+        /* Interactive feature tabs */
+        .feature-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .feature-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-tab.active {
+            background-color: #00c8ff;
+            color: white;
+        }
+        
+        .feature-content {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .feature-content.active {
+            display: block;
+        }
+        
+        /* Animation Styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Visitor Counter Widget */
+        .visitor-counter {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .visitor-counter h4 {
+            margin-bottom: 15px;
+            color: #0a192f;
+        }
+        
+        .counter-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .counter-digit {
+            background-color: #0a192f;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 10px;
+            margin: 0 3px;
+            border-radius: 5px;
+            width: 40px;
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 991px) {
+            .about-content,
+            .contact-content,
+            .tech-container,
+            .solution-detail-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .solutions-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .header-content {
+                position: relative;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                width: 100%;
+                top: 100%;
+                left: 0;
+                background-color: #0a192f;
+                padding: 20px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                visibility: hidden;
+                z-index: 100;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .solutions-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .api-tabs,
+            .chart-tabs,
+            .feature-tabs {
+                flex-direction: column;
+            }
+            
+            .api-tab,
+            .chart-tab,
+            .feature-tab {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="logo.svg" alt="Atlas NI Communications Corp Logo">
+                    <h1>Atlas NI Communications</h1>
+                </div>
+                <button class="mobile-nav-toggle">☰</button>
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#technology">Technology</a></li>
+                        <li><a href="#solutions">Solutions</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Next-Generation Intelligent Transceivers</h2>
+                <p>Revolutionizing High-Speed Telecom with Smart, Software-Defined Optical Solutions using Natural Intelligence (NI) technology</p>
+                <a href="#solutions" class="btn">Explore Solutions</a>
+                <a href="#api-documentation" class="btn btn-outline">API Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>About Us</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1551909353-ce0d99da8080?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Atlas NI Communications Corp Technology">
+                </div>
+                <div class="about-text fade-in">
+                    <h3>Pioneering the Future of Optical Communications</h3>
+                    <p><strong>Atlas NI Communications Corp.</strong> is a subsidiary of AI Atlas Inc., specifically dedicated to the application of Natural Intelligence (NI) technology in fiber optic communications and optical transceivers. Founded in 2025, we are pioneering software-defined transceiver solutions using Natural Intelligence (NI)—an advanced AI-inspired technology that optimizes high-speed optical and wireless communications in real-time.</p>
+                    <p>In today's hyper-connected world, high-speed telecom and datacenter networks are essential for powering everything from cloud computing and artificial intelligence to global communication and financial systems. Our breakthrough technology addresses critical inefficiencies that threaten their sustainability and performance.</p>
+                    <p>Our revolutionary technology represents a paradigm shift in optical communication, offering a smarter, greener, and faster solution to meet the demands of a data-driven world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Stats Section with interactive charts -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-box fade-in" id="energyStat">
+                    <div class="stat-number" data-count="25">0</div>
+                    <div class="stat-text">Energy Reduction</div>
+                </div>
+                <div class="stat-box fade-in" id="bandwidthStat">
+                    <div class="stat-number" data-count="35">0</div>
+                    <div class="stat-text">Bandwidth Increase</div>
+                </div>
+                <div class="stat-box fade-in" id="costStat">
+                    <div class="stat-number" data-prefix="$" data-count="10" data-suffix="B+">$0B+</div>
+                    <div class="stat-text">Cost Savings</div>
+                </div>
+                <div class="stat-box fade-in" id="rangeStat">
+                    <div class="stat-number" data-prefix="" data-count="3" data-suffix="x">0x</div>
+                    <div class="stat-text">Range Increase</div>
+                </div>
+            </div>
+            
+            <!-- Interactive Data Visualization -->
+            <div class="data-visualization fade-in">
+                <div class="chart-container">
+                    <div class="chart-tabs">
+                        <div class="chart-tab active" data-chart="performance">Performance</div>
+                        <div class="chart-tab" data-chart="energy">Energy Efficiency</div>
+                        <div class="chart-tab" data-chart="cost">Cost Comparison</div>
+                    </div>
+                    <canvas id="performanceChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="tech-showcase">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Technology</h2>
+            </div>
+            <div class="tech-container">
+                <div class="tech-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Natural Intelligence Technology">
+                </div>
+                <div class="tech-info fade-in">
+                    <h3>Natural Intelligence (NI) Technology</h3>
+                    <p>Our breakthrough Natural Intelligence (NI) technology is a revolutionary alternative to traditional artificial intelligence, inspired by the human brain's cognitive processes. This innovative approach transforms optical transceivers to address the critical challenges of modern telecom networks.</p>
+                    
+                    <!-- Interactive Feature Tabs -->
+                    <div class="feature-tabs">
+                        <div class="feature-tab active" data-feature="latency">Reduced Latency</div>
+                        <div class="feature-tab" data-feature="energy">Energy Efficiency</div>
+                        <div class="feature-tab" data-feature="data">Enhanced Data Rates</div>
+                        <div class="feature-tab" data-feature="adaptive">Adaptive Intelligence</div>
+                    </div>
+                    
+                    <!-- Feature Content -->
+                    <div id="latency-content" class="feature-content active">
+                        <h4>Reduced Latency</h4>
+                        <p>Our NI technology significantly reduces response time from 1μs to 20μs, enabling real-time applications like remote surgery and financial trading.</p>
+                        <div class="tech-feature">
+                            <div class="tech-feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="tech-feature-text">
+                                <p>Traditional optical transceivers struggle with signal processing delays that impact time-sensitive applications. Our NI technology uses predictive algorithms to optimize signal paths, dramatically reducing latency.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="energy-content" class="feature-content">
+                        <h4>Energy Efficiency</h4>
+                        <p>Cut power consumption by up to 30%, reducing operational costs and environmental impact in large-scale telecom infrastructure.</p>
+                        <div class="tech-feature">
+                            <div class="tech-feature-icon"><i class="fas fa-leaf"></i></div>
+                            <div class="tech-feature-text">
+                                <p>By optimizing signal processing and implementing smart power management, our technology significantly reduces the energy required for high-speed data transmission, making it an environmentally friendly solution.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="data-content" class="feature-content">
+                        <h4>Enhanced Data Rates</h4>
+                        <p>Achieve 25% higher data throughput without requiring additional infrastructure upgrades.</p>
+                        <div class="tech-feature">
+                            <div class="tech-feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="tech-feature-text">
+                                <p>Our advanced modulation schemes and intelligent spectral efficiency techniques maximize the capacity of existing fiber infrastructure, allowing you to transmit more data without costly upgrades.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="adaptive-content" class="feature-content">
+                        <h4>Adaptive Intelligence</h4>
+                        <p>Our systems dynamically adapt to changing network conditions, optimizing performance in real-time.</p>
+                        <div class="tech-feature">
+                            <div class="tech-feature-icon"><i class="fas fa-brain"></i></div>
+                            <div class="tech-feature-text">
+                                <p>Unlike static systems, our NI technology continuously monitors network conditions and adapts its operation to maintain optimal performance, even in challenging environments or during peak traffic periods.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Solutions</h2>
+            </div>
+            <div class="solutions-content">
+                <div class="solution-card fade-in">
+                    <div class="solution-icon">
+                        <i class="fas fa-microchip fa-3x"></i>
+                    </div>
+                    <div class="solution-info">
+                        <h3>AI-OptiNet</h3>
+                        <p>Our flagship product integrates Natural Intelligence into optical transceivers, reducing latency, enhancing network efficiency, and lowering operational costs.</p>
+                        <a href="#opti-net" class="solution-link">Explore Solution</a>
+                    </div>
+                </div>
+                <div class="solution-card fade-in">
+                    <div class="solution-icon">
+                        <i class="fas fa-code fa-3x"></i>
+                    </div>
+                    <div class="solution-info">
+                        <h3>Software-Based Solution</h3>
+                        <p>Server-side installation that works with existing transceivers, requiring no hardware changes while providing immediate latency reduction.</p>
+                        <a href="#software-solution" class="solution-link">Explore Solution</a>
+                    </div>
+                </div>
+                <div class="solution-card fade-in">
+                    <div class="solution-icon">
+                        <i class="fas fa-server fa-3x"></i>
+                    </div>
+                    <div class="solution-info">
+                        <h3>Hardware-Based Solution</h3>
+                        <p>Our advanced hardware solution featuring FPGA with NI technology provides complete integration for maximum performance and efficiency.</p>
+                        <a href="#hardware-solution" class="solution-link">Explore Solution</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OptiNet Solution Detail -->
+    <section id="opti-net" class="solution-detail">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>AI-OptiNet</h2>
+            </div>
+            <div class="solution-detail-content">
+                <div class="solution-detail-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="AI-OptiNet Solution">
+                </div>
+                <div class="solution-detail-info fade-in">
+                    <h3>Our Flagship NI-Powered Optical Transceiver</h3>
+                    <p>AI-OptiNet represents the pinnacle of our NI technology integration. This flagship product combines cutting-edge hardware with our proprietary Natural Intelligence algorithms to deliver unprecedented performance in optical communications.</p>
+                    
+                    <div class="solution-detail-features">
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Complete NI Integration</h4>
+                                <p>Full implementation of our Natural Intelligence technology optimized specifically for optical communications, enabling real-time adaptation to network conditions.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Up to 35% Bandwidth Increase</h4>
+                                <p>Maximize your existing infrastructure with significant bandwidth improvements without requiring additional hardware investments.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>25% Energy Reduction</h4>
+                                <p>Lower operational costs and environmental impact through our energy-efficient design, which requires fewer computations for signal processing.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Ultra-Low Latency</h4>
+                                <p>Critical for applications like financial trading, remote surgery, and real-time control systems, our technology dramatically reduces response times.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive API for this solution -->
+                    <div class="api-explorer">
+                        <h4>AI-OptiNet API Integration</h4>
+                        <div class="code-block">
+# Python example to connect to an AI-OptiNet device
+import atlasni
+
+# Initialize client
+client = atlasni.Client(api_key="YOUR_API_KEY")
+
+# Connect to device
+device = client.devices.get("dev_123456")
+
+# Monitor performance in real-time
+for metrics in device.stream_metrics(interval="1s"):
+    print(f"Throughput: {metrics.throughput} Gbps")
+    print(f"Latency: {metrics.latency} μs")
+    
+# Apply optimization profile
+device.apply_profile("prof_lowlatency")
+                        </div>
+                        
+                        <div class="btn-container">
+                            <a href="#api-documentation" class="btn">View Full API Documentation</a>
+                            <a href="#download-sdk" class="btn btn-outline">Download SDK</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#solutions" class="home-link"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Software Solution Detail -->
+    <section id="software-solution" class="solution-detail">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Software-Based Solution</h2>
+            </div>
+            <div class="solution-detail-content">
+                <div class="solution-detail-image fade-in">
+                    <!-- Software Solution SVG Illustration -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="width:100%; height:auto; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+                        <!-- Background -->
+                        <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10" />
+                        
+                        <!-- Server Rack -->
+                        <rect x="500" y="100" width="200" height="300" fill="#0a192f" rx="10" ry="10" />
+                        <rect x="510" y="110" width="180" height="280" fill="#152a47" rx="5" ry="5" />
+                        
+                        <!-- Server Units -->
+                        <rect x="520" y="130" width="160" height="40" fill="#333" rx="3" ry="3" />
+                        <rect x="520" y="180" width="160" height="40" fill="#333" rx="3" ry="3" />
+                        <rect x="520" y="230" width="160" height="40" fill="#333" rx="3" ry="3" />
+                        <rect x="520" y="280" width="160" height="40" fill="#333" rx="3" ry="3" />
+                        
+                        <!-- Server LEDs -->
+                        <circle cx="540" y="150" r="5" fill="#00ff00" />
+                        <circle cx="540" y="200" r="5" fill="#00ff00" />
+                        <circle cx="540" y="250" r="5" fill="#00ff00" />
+                        <circle cx="540" y="300" r="5" fill="#00ff00" />
+                        
+                        <!-- Server Rack Label -->
+                        <text x="600" y="350" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Data Center Servers</text>
+                        
+                        <!-- Network Switch -->
+                        <rect x="520" y="330" width="160" height="20" fill="#00c8ff" rx="3" ry="3" />
+                        <text x="600" y="345" font-family="Arial" font-size="10" fill="white" text-anchor="middle">Network Switch</text>
+                        
+                        <!-- Network Connections -->
+                        <line x1="450" y1="150" x2="520" y2="150" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="450" y1="200" x2="520" y2="200" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="450" y1="250" x2="520" y2="250" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="450" y1="300" x2="520" y2="300" stroke="#00c8ff" stroke-width="2" />
+                        
+                        <!-- Software Defined Platform -->
+                        <rect x="200" y="150" width="250" height="200" fill="#0066cc" rx="10" ry="10" opacity="0.9" />
+                        <text x="325" y="180" font-family="Arial" font-size="18" fill="white" text-anchor="middle" font-weight="bold">Software-Defined NI Platform</text>
+                        
+                        <!-- Software Components -->
+                        <rect x="230" y="200" width="80" height="40" fill="white" rx="5" ry="5" opacity="0.9" />
+                        <text x="270" y="223" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">Signal Processing</text>
+                        
+                        <rect x="230" y="260" width="80" height="40" fill="white" rx="5" ry="5" opacity="0.9" />
+                        <text x="270" y="283" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">NI Algorithms</text>
+                        
+                        <rect x="340" y="200" width="80" height="40" fill="white" rx="5" ry="5" opacity="0.9" />
+                        <text x="380" y="223" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">Optimization Engine</text>
+                        
+                        <rect x="340" y="260" width="80" height="40" fill="white" rx="5" ry="5" opacity="0.9" />
+                        <text x="380" y="283" font-family="Arial" font-size="10" fill="#0066cc" text-anchor="middle">Monitoring Dashboard</text>
+                        
+                        <!-- Connection Lines Between Components -->
+                        <line x1="310" y1="220" x2="340" y2="220" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="310" y1="280" x2="340" y2="280" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="270" y1="240" x2="270" y2="260" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="380" y1="240" x2="380" y2="260" stroke="#00c8ff" stroke-width="2" />
+                        
+                        <!-- Existing Hardware - Optical Transceivers -->
+                        <rect x="100" y="100" width="60" height="30" fill="#444" rx="5" ry="5" />
+                        <rect x="100" y="150" width="60" height="30" fill="#444" rx="5" ry="5" />
+                        <rect x="100" y="200" width="60" height="30" fill="#444" rx="5" ry="5" />
+                        <rect x="100" y="250" width="60" height="30" fill="#444" rx="5" ry="5" />
+                        <rect x="100" y="300" width="60" height="30" fill="#444" rx="5" ry="5" />
+                        <rect x="100" y="350" width="60" height="30" fill="#444" rx="5" ry="5" />
+                        
+                        <!-- Labels for existing hardware -->
+                        <text x="130" y="420" font-family="Arial" font-size="14" fill="#0a192f" text-anchor="middle">Existing Optical Transceivers</text>
+                        
+                        <!-- Connection Lines from Transceivers to Software Platform -->
+                        <line x1="160" y1="115" x2="200" y2="180" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="160" y1="165" x2="200" y2="200" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="160" y1="215" x2="200" y2="230" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="160" y1="265" x2="200" y2="270" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="160" y1="315" x2="200" y2="300" stroke="#00c8ff" stroke-width="2" />
+                        <line x1="160" y1="365" x2="200" y2="320" stroke="#00c8ff" stroke-width="2" />
+                        
+                        <!-- Data Flow Visualization -->
+                        <g>
+                            <circle cx="180" cy="150" r="3" fill="#fff">
+                                <animate attributeName="cx" from="160" to="200" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="170" cy="200" r="3" fill="#fff">
+                                <animate attributeName="cx" from="160" to="200" dur="3s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="190" cy="250" r="3" fill="#fff">
+                                <animate attributeName="cx" from="160" to="200" dur="2.5s" repeatCount="indefinite" />
+                            </circle>
+                            
+                            <circle cx="400" cy="200" r="3" fill="#fff">
+                                <animate attributeName="cx" from="380" to="450" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="410" cy="250" r="3" fill="#fff">
+                                <animate attributeName="cx" from="380" to="450" dur="2.2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="420" cy="300" r="3" fill="#fff">
+                                <animate attributeName="cx" from="380" to="450" dur="2.6s" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+                    </svg>
+                </div>
+                <div class="solution-detail-info fade-in">
+                    <h3>Upgrade Existing Infrastructure Instantly</h3>
+                    <p>Our software-based solution allows you to enhance your current optical communication systems without replacing your existing hardware. This server-side implementation delivers immediate performance improvements with minimal disruption to your operations.</p>
+                    
+                    <div class="solution-detail-features">
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>No Hardware Changes Required</h4>
+                                <p>Integrate seamlessly with your existing optical transceivers, protecting your current investment while enhancing performance.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Rapid Deployment</h4>
+                                <p>Implementation takes days, not months, allowing you to quickly realize performance gains and operational efficiencies.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Subscription-Based Model</h4>
+                                <p>Flexible licensing options that scale with your needs, ensuring you only pay for what you use while always having access to the latest updates.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Performance Monitoring</h4>
+                                <p>Advanced analytics dashboard provides real-time insights into system performance, helping you identify bottlenecks and optimization opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Software Demo Section -->
+                    <div class="api-explorer">
+                        <h4>Software Configuration Interface</h4>
+                        <div class="code-block">
+# Example configuration file for software deployment
+{
+  "network": {
+    "interface": "eth0",
+    "monitoring_interval": "1s",
+    "buffer_size": 256,
+    "adaptive_routing": true
+  },
+  "optimization": {
+    "mode": "balanced",  // Options: latency, throughput, balanced
+    "energy_saving": true,
+    "auto_tune": true
+  },
+  "integration": {
+    "syslog": true,
+    "prometheus": true,
+    "rest_api": {
+      "enabled": true,
+      "port": 8080,
+      "auth": "bearer"
+    }
+  }
+}
+                        </div>
+                        
+                        <div class="btn-container">
+                            <a href="#download-software" class="btn">Download Software</a>
+                            <a href="#documentation" class="btn btn-outline">View Documentation</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#solutions" class="home-link"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hardware Solution Detail -->
+    <section id="hardware-solution" class="solution-detail">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Hardware-Based Solution</h2>
+            </div>
+            <div class="solution-detail-content">
+                <div class="solution-detail-image fade-in">
+                    <!-- Hardware Solution SVG Illustration -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="width:100%; height:auto; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+                        <!-- Background -->
+                        <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10" />
+                        
+                        <!-- Optical Transceiver Housing -->
+                        <rect x="150" y="100" width="500" height="300" rx="20" ry="20" fill="#0a192f" stroke="#00c8ff" stroke-width="2" />
+                        <rect x="160" y="110" width="480" height="280" rx="15" ry="15" fill="#152a47" />
+                        
+                        <!-- Ports -->
+                        <rect x="150" y="150" width="20" height="50" fill="#444" stroke="#777" stroke-width="1" />
+                        <rect x="150" y="250" width="20" height="50" fill="#444" stroke="#777" stroke-width="1" />
+                        <rect x="150" y="350" width="20" height="50" fill="#444" stroke="#777" stroke-width="1" />
+                        
+                        <!-- Fiber Connections -->
+                        <line x1="120" y1="175" x2="150" y2="175" stroke="#ff9e00" stroke-width="3" />
+                        <line x1="120" y1="275" x2="150" y2="275" stroke="#ff9e00" stroke-width="3" />
+                        <line x1="120" y1="375" x2="150" y2="375" stroke="#ff9e00" stroke-width="3" />
+                        
+                        <!-- NI Core Box -->
+                        <rect x="300" y="160" width="200" height="180" rx="10" ry="10" fill="#00c8ff" opacity="0.9" />
+                        <text x="400" y="200" font-family="Arial" font-size="24" fill="white" text-anchor="middle" font-weight="bold">NI Core</text>
+                        <text x="400" y="240" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Natural Intelligence</text>
+                        <text x="400" y="260" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Processing Engine</text>
+                        
+                        <!-- Connection Lines from NI to Various Components -->
+                        <line x1="300" y1="200" x2="250" y2="175" stroke="white" stroke-width="2" stroke-dasharray="5,5" />
+                        <line x1="300" y1="250" x2="250" y2="275" stroke="white" stroke-width="2" stroke-dasharray="5,5" />
+                        <line x1="300" y1="300" x2="250" y2="375" stroke="white" stroke-width="2" stroke-dasharray="5,5" />
+                        
+                        <!-- FPGA Processor -->
+                        <rect x="550" y="170" width="70" height="70" rx="5" ry="5" fill="#333" stroke="#777" stroke-width="1" />
+                        <text x="585" y="210" font-family="Arial" font-size="12" fill="white" text-anchor="middle">FPGA</text>
+                        
+                        <!-- Memory Module -->
+                        <rect x="550" y="270" width="70" height="40" rx="5" ry="5" fill="#333" stroke="#777" stroke-width="1" />
+                        <text x="585" y="295" font-family="Arial" font-size="12" fill="white" text-anchor="middle">DDR5</text>
+                        
+                        <!-- Connection Lines -->
+                        <line x1="500" y1="200" x2="550" y2="200" stroke="white" stroke-width="2" />
+                        <line x1="500" y1="250" x2="550" y2="290" stroke="white" stroke-width="2" />
+                        
+                        <!-- Status LEDs -->
+                        <circle cx="220" y="140" r="5" fill="#00ff00" />
+                        <circle cx="240" y="140" r="5" fill="#00c8ff" />
+                        <circle cx="260" y="140" r="5" fill="#ff9e00" />
+                        
+                        <!-- Labels -->
+                        <text x="400" y="430" font-family="Arial" font-size="16" fill="#0a192f" text-anchor="middle" font-weight="bold">Atlas NI Hardware-Based Optical Transceiver</text>
+                        
+                        <!-- Signal Flow Arrows -->
+                        <path d="M 170 175 Q 200 175, 200 200 T 230 220" fill="none" stroke="#00c8ff" stroke-width="2" />
+                        <path d="M 170 275 Q 200 275, 200 250 T 230 240" fill="none" stroke="#00c8ff" stroke-width="2" />
+                        <path d="M 170 375 Q 200 375, 200 300 T 230 260" fill="none" stroke="#00c8ff" stroke-width="2" />
+                        
+                        <!-- Data Flow Visualization -->
+                        <g>
+                            <circle cx="200" cy="175" r="3" fill="#fff">
+                                <animate attributeName="cx" from="150" to="300" dur="3s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="210" cy="275" r="3" fill="#fff">
+                                <animate attributeName="cx" from="150" to="300" dur="2.5s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="190" cy="375" r="3" fill="#fff">
+                                <animate attributeName="cx" from="150" to="300" dur="4s" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+                    </svg>
+                </div>
+                <div class="solution-detail-info fade-in">
+                    <h3>Maximum Performance Through Custom Hardware</h3>
+                    <p>Our hardware-based solution represents the highest level of performance, combining FPGA technology with our proprietary NI algorithms to deliver unmatched efficiency and speed in optical communications.</p>
+                    
+                    <div class="solution-detail-features">
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>FPGA with NI Technology</h4>
+                                <p>Custom field-programmable gate arrays optimized specifically for our Natural Intelligence algorithms, providing the perfect balance of flexibility and performance.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Complete Technical Control</h4>
+                                <p>Gain full access to all hardware parameters and configurations, allowing for precise optimization to meet your specific network requirements.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Future-Proof Design</h4>
+                                <p>Firmware updates and modular components ensure your investment remains cutting-edge as technology evolves, eliminating the need for complete system replacements.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Enterprise-Grade Security</h4>
+                                <p>Advanced encryption and security protocols built directly into the hardware, protecting your data from increasingly sophisticated threats.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hardware Interactive Diagram -->
+                    <div class="api-explorer">
+                        <h4>Hardware Specifications</h4>
+                        <table class="specs-table" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <tr>
+                                <th style="text-align:left; padding:10px; border-bottom:1px solid #ddd;">Specification</th>
+                                <th style="text-align:left; padding:10px; border-bottom:1px solid #ddd;">Value</th>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Processor</td>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Custom NI-optimized FPGA</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Memory</td>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">16GB DDR5</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Throughput</td>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Up to 400Gbps</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Latency</td>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;"><20μs</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Form Factor</td>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">QSFP-DD, OSFP</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">Power Consumption</td>
+                                <td style="padding:10px; border-bottom:1px solid #ddd;">12W (average)</td>
+                            </tr>
+                        </table>
+                        
+                        <div class="btn-container">
+                            <a href="#hardware-specs" class="btn">Download Full Specifications</a>
+                            <a href="#hardware-api" class="btn btn-outline">View Hardware API</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#solutions" class="home-link"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Integration Solution -->
+    <section id="custom-integration" class="solution-detail">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Custom Integration Solutions</h2>
+            </div>
+            <div class="solution-detail-content">
+                <div class="solution-detail-image fade-in">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Custom Integration Solution">
+                </div>
+                <div class="solution-detail-info fade-in">
+                    <h3>Tailored Solutions for Unique Challenges</h3>
+                    <p>Every network infrastructure has its unique requirements and challenges. Our custom integration services provide bespoke solutions that perfectly align with your specific needs, ensuring optimal performance and efficiency.</p>
+                    
+                    <div class="solution-detail-features">
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Needs Assessment</h4>
+                                <p>Our team of experts works closely with you to thoroughly understand your current infrastructure, challenges, and objectives, forming the foundation for a tailored solution.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Hybrid Solutions</h4>
+                                <p>Combine our software and hardware offerings in a way that best suits your needs, creating a comprehensive solution that addresses all aspects of your communications infrastructure.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Legacy System Integration</h4>
+                                <p>Seamlessly integrate our cutting-edge technology with your existing systems, ensuring a smooth transition and protecting your previous investments.</p>
+                            </div>
+                        </div>
+                        <div class="solution-detail-feature">
+                            <div class="solution-detail-icon"><i class="fas fa-check"></i></div>
+                            <div class="solution-detail-text">
+                                <h4>Ongoing Support</h4>
+                                <p>Receive dedicated technical support, regular updates, and continuous optimization to ensure your custom solution evolves with your changing needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="api-explorer">
+                        <h4>Custom Integration Workflow</h4>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <div style="display: flex; justify-content: space-between; max-width: 600px; margin: 0 auto;">
+                                <div style="text-align:center; width:100px;">
+                                    <div style="width:60px; height:60px; background:#00c8ff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; color:white;">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <p style="margin-top:10px; font-size:0.9rem;">Assessment</p>
+                                </div>
+                                <div style="text-align:center; width:100px;">
+                                    <div style="width:60px; height:60px; background:#00c8ff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; color:white;">
+                                        <i class="fas fa-pencil-ruler"></i>
+                                    </div>
+                                    <p style="margin-top:10px; font-size:0.9rem;">Design</p>
+                                </div>
+                                <div style="text-align:center; width:100px;">
+                                    <div style="width:60px; height:60px; background:#00c8ff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; color:white;">
+                                        <i class="fas fa-cogs"></i>
+                                    </div>
+                                    <p style="margin-top:10px; font-size:0.9rem;">Implementation</p>
+                                </div>
+                                <div style="text-align:center; width:100px;">
+                                    <div style="width:60px; height:60px; background:#00c8ff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto; color:white;">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <p style="margin-top:10px; font-size:0.9rem;">Optimization</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-container">
+                            <a href="#contact" class="btn">Contact Our Integration Team</a>
+                            <a href="#case-studies" class="btn btn-outline">View Case Studies</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#solutions" class="home-link"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Documentation Section -->
+    <section id="api-documentation" class="tech-showcase">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>API Documentation</h2>
+            </div>
+            <div class="tech-container">
+                <div class="tech-info fade-in">
+                    <h3>Integrate with Our Platform</h3>
+                    <p>Our comprehensive API allows you to seamlessly integrate Atlas NI technology into your existing systems and applications. Automate configuration, monitor performance, and harness the full power of our Natural Intelligence technology programmatically.</p>
+                    
+                    <!-- API Explorer -->
+                    <div class="api-explorer">
+                        <h4>Interactive API Explorer</h4>
+                        <div class="api-tabs">
+                            <div class="api-tab active" data-api="authentication">Authentication</div>
+                            <div class="api-tab" data-api="devices">Devices</div>
+                            <div class="api-tab" data-api="metrics">Metrics</div>
+                            <div class="api-tab" data-api="configuration">Configuration</div>
+                        </div>
+                        
+                        <!-- Authentication API -->
+                        <div id="authentication-api" class="api-content active">
+                            <h4>Authentication</h4>
+                            <p>Secure your API requests using token-based authentication.</p>
+                            
+                            <div class="endpoint-list">
+                                <li class="active" data-endpoint="auth-token">Generate Auth Token</li>
+                                <li data-endpoint="auth-refresh">Refresh Token</li>
+                                <li data-endpoint="auth-revoke">Revoke Token</li>
+                            </div>
+                            
+                            <div id="auth-token-content" class="endpoint-content active">
+                                <h5>POST /api/v1/auth/token</h5>
+                                <p>Generates a new authentication token for API access.</p>
+                                
+                                <div class="code-block">
+curl -X POST https://api.atlasni.com/v1/auth/token \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_id": "YOUR_CLIENT_ID",
+    "client_secret": "YOUR_CLIENT_SECRET"
+  }'
+                                </div>
+                                
+                                <h5>Response:</h5>
+                                <div class="code-block">
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Devices API -->
+                        <div id="devices-api" class="api-content">
+                            <h4>Devices</h4>
+                            <p>Manage and monitor your NI-enabled devices.</p>
+                            
+                            <div class="endpoint-list">
+                                <li class="active" data-endpoint="devices-list">List Devices</li>
+                                <li data-endpoint="devices-status">Device Status</li>
+                                <li data-endpoint="devices-configure">Configure Device</li>
+                            </div>
+                            
+                            <div id="devices-list-content" class="endpoint-content active">
+                                <h5>GET /api/v1/devices</h5>
+                                <p>Retrieves a list of all devices in your account.</p>
+                                
+                                <div class="code-block">
+curl -X GET https://api.atlasni.com/v1/devices \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+                                </div>
+                                
+                                <h5>Response:</h5>
+                                <div class="code-block">
+{
+  "devices": [
+    {
+      "id": "dev_123456",
+      "name": "DC-North-Rack3-Device1",
+      "model": "AI-OptiNet-10G",
+      "status": "online",
+      "last_seen": "2025-03-22T14:30:22Z"
+    },
+    {
+      "id": "dev_123457",
+      "name": "DC-North-Rack3-Device2",
+      "model": "AI-OptiNet-100G",
+      "status": "online",
+      "last_seen": "2025-03-22T14:31:05Z"
+    }
+  ],
+  "total": 2,
+  "page": 1,
+  "per_page": 10
+}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Metrics API -->
+                        <div id="metrics-api" class="api-content">
+                            <h4>Metrics</h4>
+                            <p>Retrieve performance and operational metrics from your devices.</p>
+                            
+                            <div class="endpoint-list">
+                                <li class="active" data-endpoint="metrics-performance">Performance Metrics</li>
+                                <li data-endpoint="metrics-energy">Energy Usage</li>
+                                <li data-endpoint="metrics-alerts">Alerts</li>
+                            </div>
+                            
+                            <div id="metrics-performance-content" class="endpoint-content active">
+                                <h5>GET /api/v1/metrics/performance</h5>
+                                <p>Retrieves performance metrics for a specific device or all devices.</p>
+                                
+                                <div class="code-block">
+curl -X GET https://api.atlasni.com/v1/metrics/performance?device_id=dev_123456&period=1h \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+                                </div>
+                                
+                                <h5>Response:</h5>
+                                <div class="code-block">
+{
+  "device_id": "dev_123456",
+  "period": "1h",
+  "metrics": {
+    "throughput": {
+      "avg": 8.2,
+      "max": 9.7,
+      "min": 7.1,
+      "unit": "Gbps"
+    },
+    "latency": {
+      "avg": 12.3,
+      "max": 18.5,
+      "min": 8.7,
+      "unit": "μs"
+    },
+    "packet_loss": {
+      "avg": 0.002,
+      "max": 0.005,
+      "min": 0.000,
+      "unit": "%"
+    }
+  },
+  "timestamp": "2025-03-22T15:00:00Z"
+}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Configuration API -->
+                        <div id="configuration-api" class="api-content">
+                            <h4>Configuration</h4>
+                            <p>Configure and optimize your devices for specific use cases.</p>
+                            
+                            <div class="endpoint-list">
+                                <li class="active" data-endpoint="config-profiles">Configuration Profiles</li>
+                                <li data-endpoint="config-apply">Apply Configuration</li>
+                                <li data-endpoint="config-optimize">Auto-Optimize</li>
+                            </div>
+                            
+                            <div id="config-profiles-content" class="endpoint-content active">
+                                <h5>GET /api/v1/configuration/profiles</h5>
+                                <p>Lists available configuration profiles for your devices.</p>
+                                
+                                <div class="code-block">
+curl -X GET https://api.atlasni.com/v1/configuration/profiles \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+                                </div>
+                                
+                                <h5>Response:</h5>
+                                <div class="code-block">
+{
+  "profiles": [
+    {
+      "id": "prof_lowlatency",
+      "name": "Low Latency",
+      "description": "Optimized for minimum latency applications like financial trading",
+      "parameters": {
+        "qos_priority": "latency",
+        "buffer_size": "minimal",
+        "adaptive_routing": true
+      }
+    },
+    {
+      "id": "prof_highbandwidth",
+      "name": "High Bandwidth",
+      "description": "Maximizes throughput for data-intensive applications",
+      "parameters": {
+        "qos_priority": "throughput",
+        "compression": "enabled",
+        "adaptive_routing": true
+      }
+    }
+  ]
+}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-image fade-in">
+                    <div class="visitor-counter">
+                        <h4>Real-time Website Analytics</h4>
+                        <p>Using our visitor tracking API to display live website statistics</p>
+                        <div class="counter-container" id="visitorCounter">
+                            <div class="counter-digit">0</div>
+                            <div class="counter-digit">0</div>
+                            <div class="counter-digit">0</div>
+                            <div class="counter-digit">0</div>
+                        </div>
+                        <p class="mt-3">Current visitors online: <span id="activeVisitors">12</span></p>
+                        <div class="chart-container">
+                            <canvas id="visitorChart" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Our Leadership Team</h2>
+            </div>
+            <div class="team-members">
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Dr. Mark Persaud">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Mark Persaud</h3>
+                        <p class="position">President</p>
+                        <p class="bio">A distinguished Canadian lawyer with a track record in governance, policy, and business development, overseeing legal strategy and partnerships.</p>
+                    </div>
+                </div>
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Prof. Shiva Kumar">
+                    </div>
+                    <div class="member-info">
+                        <h3>Prof. Shiva Kumar</h3>
+                        <p class="position">CEO</p>
+                        <p class="bio">World-class expert in optical communication systems, recognized internationally for contributions to fiber design and nonlinear systems.</p>
+                    </div>
+                </div>
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Dr. Mahdi Naghshvarianjahromi">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Mahdi Naghshvarianjahromi</h3>
+                        <p class="position">CTO</p>
+                        <p class="bio">Expert in fiber-optic communications systems and nonlinear impairment mitigation, leads product R&D and advanced signal processing.</p>
+                    </div>
+                </div>
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://via.placeholder.com/150" alt="Prof. Jamal Deen">
+                    </div>
+                    <div class="member-info">
+                        <h3>Prof. Jamal Deen</h3>
+                        <p class="position">CSO</p>
+                        <p class="bio">Distinguished University Professor and expert in nano-/opto-electronics and data analytics, with extensive experience in technology commercialization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h3>Get In Touch</h3>
+                    <p>Interested in learning more about our revolutionary optical transceiver technology? Contact us today to discuss how Atlas NI Communications Corp. can help transform your telecom infrastructure.</p>
+                    <div class="contact-details">
+                        <div>
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <p>North York, Canada</p>
+                        </div>
+                        <div>
+                            <span><i class="fas fa-phone-alt"></i></span>
+                            <p>+1 (xxx) xxx-xxxx</p>
+                        </div>
+                        <div>
+                            <span><i class="fas fa-envelope"></i></span>
+                            <p>info@aiatlasinc.ca</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form fade-in">
+                    <div class="form-success" id="formSuccess">
+                        <p>Your message has been sent successfully. We'll get back to you shortly!</p>
+                    </div>
+                    <div class="form-error" id="formError">
+                        <p>There was an error sending your message. Please try again later.</p>
+                    </div>
+                    <form action="https://formspree.io/f/your-formspree-endpoint" method="POST" id="contactForm" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key"></div>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Atlas NI Communications</h3>
+                    <p>A subsidiary of AI Atlas Inc., revolutionizing high-speed telecom with Natural Intelligence technology for smarter, greener, and faster data networks.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#technology">Our Technology</a></li>
+                        <li><a href="#solutions">Solutions</a></li>
+                        <li><a href="#team">Our Team</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#opti-net">AI-OptiNet</a></li>
+                        <li><a href="#software-solution">Software Solutions</a></li>
+                        <li><a href="#hardware-solution">Hardware Solutions</a></li>
+                        <li><a href="#custom-integration">Custom Integration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>North York, Canada</li>
+                        <li>info@aiatlasinc.ca</li>
+                        <li>+1 (xxx) xxx-xxxx</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Atlas NI Communications Corp. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Wix Analytics Integration -->
+    <script type="text/javascript">
+        (function() {
+            // Wix Analytics Integration
+            // This code connects to Wix Analytics when your custom domain is connected to your Wix site
+            
+            window.wixVisitorTracking = {
+                init: function() {
+                    // Track page view
+                    this.trackPageView();
+                    
+                    // Update visitor counter
+                    this.updateVisitorCounter();
+                    
+                    console.log("Wix Analytics Integration Initialized");
+                },
+                
+                trackPageView: function() {
+                    // When connected to Wix, this would use their API
+                    console.log("Page view tracked: " + window.location.pathname);
+                },
+                
+                updateVisitorCounter: function() {
+                    // This would typically fetch data from Wix analytics API
+                    // For now, we'll simulate the counter with random increases
+                    
+                    // Update total visitor count (simulated)
+                    let visitorCount = Math.floor(1000 + Math.random() * 500);
+                    this.displayVisitorCount(visitorCount);
+                    
+                    // Update active visitor count (simulated)
+                    let activeVisitors = Math.floor(10 + Math.random() * 20);
+                    if (document.getElementById('activeVisitors')) {
+                        document.getElementById('activeVisitors').textContent = activeVisitors;
+                    }
+                    
+                    // Schedule next update
+                    setTimeout(this.updateVisitorCounter.bind(this), 30000); // Update every 30 seconds
+                },
+                
+                displayVisitorCount: function(count) {
+                    const counterDigits = document.querySelectorAll('#visitorCounter .counter-digit');
+                    if (counterDigits.length > 0) {
+                        // Convert count to string and pad with zeros
+                        const countStr = count.toString().padStart(4, '0');
+                        
+                        // Update
 // Update each digit
                         for (let i = 0; i < counterDigits.length; i++) {
                             if (i < countStr.length) {
