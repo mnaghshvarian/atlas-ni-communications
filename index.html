@@ -705,34 +705,71 @@
             display: none;
         }
         
-        /* Modal Styles for Solution Detail */
-        #solution-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .solution-detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .solution-detail-image img {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            overflow-y: auto;
-        }
-        
-        #solution-modal-content {
-            background-color: white;
-            margin: 50px auto;
-            max-width: 1200px;
             border-radius: 10px;
-            padding: 20px;
-            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* When solution is in modal, adjust padding */
-        #solution-modal-content .solution-detail {
-            padding: 20px 0;
-            display: block;
+        .solution-detail-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0a192f;
+        }
+        
+        .solution-detail-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .solution-detail-icon {
+            background-color: rgba(0, 200, 255, 0.1);
+            color: #00c8ff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .solution-detail-text h4 {
+            margin-bottom: 10px;
+            color: #0a192f;
+            font-size: 1.2rem;
+        }
+        
+        .solution-detail-text p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Solution navigation */
+        .solution-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .home-link i {
+            margin-right: 5px;
         }
         
         .solution-detail-content {
@@ -1349,7 +1386,7 @@
                     <div class="solution-info">
                         <h3>AI-OptiNet</h3>
                         <p>Our flagship product integrates Natural Intelligence into optical transceivers, reducing latency, enhancing network efficiency, and lowering operational costs.</p>
-                        <a href="#" class="solution-link" onclick="showSolutionDetail('opti-net'); return false;">Explore Solution</a>
+                        <a href="#" class="solution-link" onclick="return showSolutionDetail('opti-net');">Explore Solution</a>
                     </div>
                 </div>
                 <div class="solution-card fade-in">
@@ -1359,7 +1396,7 @@
                     <div class="solution-info">
                         <h3>Software-Based Solution</h3>
                         <p>Server-side installation that works with existing transceivers, requiring no hardware changes while providing immediate latency reduction.</p>
-                        <a href="#" class="solution-link" onclick="showSolutionDetail('software-solution'); return false;">Explore Solution</a>
+                        <a href="#" class="solution-link" onclick="return showSolutionDetail('software-solution');">Explore Solution</a>
                     </div>
                 </div>
                 <div class="solution-card fade-in">
@@ -1369,7 +1406,7 @@
                     <div class="solution-info">
                         <h3>Hardware-Based Solution</h3>
                         <p>Our advanced hardware solution featuring FPGA with NI technology provides complete integration for maximum performance and efficiency.</p>
-                        <a href="#" class="solution-link" onclick="showSolutionDetail('hardware-solution'); return false;">Explore Solution</a>
+                        <a href="#" class="solution-link" onclick="return showSolutionDetail('hardware-solution');">Explore Solution</a>
                     </div>
                 </div>
             </div>
@@ -1860,7 +1897,7 @@ device.apply_profile("prof_lowlatency")
                         </div>
                     </div>
                     
-                    <a href="#solutions" class="home-link" onclick="hideModal(); return false;"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
+                    <a href="#solutions" class="home-link" onclick="return backToSolutions();"><i class="fas fa-arrow-left"></i> Back to Solutions</a>
                 </div>
             </div>
         </div>
@@ -2121,7 +2158,7 @@ device.apply_profile("prof_lowlatency")
             <div class="team-members">
                 <div class="team-member fade-in">
                     <div class="member-image">
-                        <img src="https://raw.githubusercontent.com/mnaghshvarian/atlas-ni-communications/main/Dr.%20Mark.avif" alt="Dr. Mark Persaud">
+                        <img src="https://via.placeholder.com/150" alt="Dr. Mark Persaud">
                     </div>
                     <div class="member-info">
                         <h3>Dr. Mark Persaud</h3>
@@ -2131,7 +2168,7 @@ device.apply_profile("prof_lowlatency")
                 </div>
                 <div class="team-member fade-in">
                     <div class="member-image">
-                        <img src="https://raw.githubusercontent.com/mnaghshvarian/atlas-ni-communications/main/Prof.%20Kumar.avif" alt="Prof. Shiva Kumar">
+                        <img src="https://via.placeholder.com/150" alt="Prof. Shiva Kumar">
                     </div>
                     <div class="member-info">
                         <h3>Prof. Shiva Kumar</h3>
@@ -2141,7 +2178,7 @@ device.apply_profile("prof_lowlatency")
                 </div>
                 <div class="team-member fade-in">
                     <div class="member-image">
-                        <img src="https://raw.githubusercontent.com/mnaghshvarian/atlas-ni-communications/main/Dr.%20Mahdi.avif" alt="Dr. Mahdi Naghshvarianjahromi">
+                        <img src="https://via.placeholder.com/150" alt="Dr. Mahdi Naghshvarianjahromi">
                     </div>
                     <div class="member-info">
                         <h3>Dr. Mahdi Naghshvarianjahromi</h3>
@@ -2151,7 +2188,7 @@ device.apply_profile("prof_lowlatency")
                 </div>
                 <div class="team-member fade-in">
                     <div class="member-image">
-                        <img src="https://raw.githubusercontent.com/mnaghshvarian/atlas-ni-communications/main/Prof.%20Deen.avif" alt="Prof. Jamal Deen">
+                        <img src="https://via.placeholder.com/150" alt="Prof. Jamal Deen">
                     </div>
                     <div class="member-info">
                         <h3>Prof. Jamal Deen</h3>
@@ -2243,10 +2280,10 @@ device.apply_profile("prof_lowlatency")
                 <div class="footer-section">
                     <h3>Solutions</h3>
                     <ul>
-                        <li><a href="#" onclick="showSolutionDetail('opti-net'); return false;">AI-OptiNet</a></li>
-                        <li><a href="#" onclick="showSolutionDetail('software-solution'); return false;">Software Solutions</a></li>
-                        <li><a href="#" onclick="showSolutionDetail('hardware-solution'); return false;">Hardware Solutions</a></li>
-                        <li><a href="#" onclick="showSolutionDetail('custom-integration'); return false;">Custom Integration</a></li>
+                        <li><a href="#" onclick="return showSolutionDetail('opti-net');">AI-OptiNet</a></li>
+                        <li><a href="#" onclick="return showSolutionDetail('software-solution');">Software Solutions</a></li>
+                        <li><a href="#" onclick="return showSolutionDetail('hardware-solution');">Hardware Solutions</a></li>
+                        <li><a href="#" onclick="return showSolutionDetail('custom-integration');">Custom Integration</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -2297,132 +2334,53 @@ device.apply_profile("prof_lowlatency")
         // Run on scroll
         window.addEventListener('scroll', fadeIn);
         
-        // Handle modal content and fade-in animations when a modal is shown
-        document.addEventListener('DOMContentLoaded', function() {
-            // Find all solution links and add the modal functionality
-            const solutionLinks = document.querySelectorAll('.solution-link, .home-link');
-            
-            solutionLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // After modal content is added, trigger fade-in animations inside modal
-                    setTimeout(() => {
-                        const modalFadeElements = document.querySelectorAll('#solution-modal-content .fade-in');
-                        modalFadeElements.forEach(element => {
-                            element.classList.add('active');
-                        });
-                    }, 100);
-                });
+        // Back to solutions function
+        function backToSolutions() {
+            // Hide all solution details
+            const allSolutionDetails = document.querySelectorAll('.solution-detail');
+            allSolutionDetails.forEach(detail => {
+                detail.style.display = 'none';
             });
-        });
-        
-        // Solution details - improved modal approach
-        function showSolutionDetail(solutionId) {
-            // Create modal overlay if it doesn't exist
-            let modalOverlay = document.getElementById('solution-modal-overlay');
-            if (!modalOverlay) {
-                modalOverlay = document.createElement('div');
-                modalOverlay.id = 'solution-modal-overlay';
-                modalOverlay.style.position = 'fixed';
-                modalOverlay.style.top = '0';
-                modalOverlay.style.left = '0';
-                modalOverlay.style.width = '100%';
-                modalOverlay.style.height = '100%';
-                modalOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-                modalOverlay.style.zIndex = '1000';
-                modalOverlay.style.display = 'none';
-                modalOverlay.style.opacity = '0';
-                modalOverlay.style.transition = 'opacity 0.3s ease';
-                modalOverlay.style.overflowY = 'auto';
-                document.body.appendChild(modalOverlay);
-                
-                // Add close button
-                const closeButton = document.createElement('div');
-                closeButton.style.position = 'fixed';
-                closeButton.style.top = '20px';
-                closeButton.style.right = '20px';
-                closeButton.style.backgroundColor = '#00c8ff';
-                closeButton.style.color = 'white';
-                closeButton.style.width = '40px';
-                closeButton.style.height = '40px';
-                closeButton.style.borderRadius = '50%';
-                closeButton.style.display = 'flex';
-                closeButton.style.alignItems = 'center';
-                closeButton.style.justifyContent = 'center';
-                closeButton.style.cursor = 'pointer';
-                closeButton.style.zIndex = '1001';
-                closeButton.innerHTML = '<i class="fas fa-times"></i>';
-                closeButton.onclick = function() {
-                    hideModal();
-                };
-                modalOverlay.appendChild(closeButton);
-                
-                // Create content container
-                const modalContent = document.createElement('div');
-                modalContent.id = 'solution-modal-content';
-                modalContent.style.backgroundColor = 'white';
-                modalContent.style.margin = '50px auto';
-                modalContent.style.maxWidth = '1200px';
-                modalContent.style.borderRadius = '10px';
-                modalContent.style.padding = '20px';
-                modalContent.style.position = 'relative';
-                modalOverlay.appendChild(modalContent);
-                
-                // Close on background click
-                modalOverlay.addEventListener('click', function(e) {
-                    if (e.target === modalOverlay) {
-                        hideModal();
-                    }
-                });
-                
-                // Close on ESC key
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') {
-                        hideModal();
-                    }
+            
+            // Scroll to solutions section with smooth scrolling
+            const solutionsSection = document.getElementById('solutions');
+            if (solutionsSection) {
+                window.scrollTo({
+                    top: solutionsSection.offsetTop - 80,
+                    behavior: 'smooth'
                 });
             }
             
-            // Get the solution detail content
-            const selectedSolution = document.getElementById(solutionId);
-            const modalContent = document.getElementById('solution-modal-content');
+            // Update URL
+            history.pushState(null, '', '#solutions');
             
-            if (selectedSolution && modalContent) {
-                // Clone the content to the modal
-                modalContent.innerHTML = '';
-                const clone = selectedSolution.cloneNode(true);
-                clone.style.display = 'block';
-                modalContent.appendChild(clone);
+            return false; // Prevent default link behavior
+        }
+        
+        // Solution details - improved smooth scrolling approach
+        function showSolutionDetail(solutionId) {
+            // Hide all solution details
+            const allSolutionDetails = document.querySelectorAll('.solution-detail');
+            allSolutionDetails.forEach(detail => {
+                detail.style.display = 'none';
+            });
+            
+            // Show selected solution detail
+            const selectedSolution = document.getElementById(solutionId);
+            if (selectedSolution) {
+                selectedSolution.style.display = 'block';
                 
-                // Show the modal
-                modalOverlay.style.display = 'block';
-                setTimeout(() => {
-                    modalOverlay.style.opacity = '1';
-                }, 10);
-                
-                // Prevent scrolling on the body
-                document.body.style.overflow = 'hidden';
+                // Scroll to solution detail with smooth scrolling
+                window.scrollTo({
+                    top: selectedSolution.offsetTop - 80,
+                    behavior: 'smooth'
+                });
                 
                 // Update URL without causing page refresh
                 history.pushState(null, '', `#${solutionId}`);
             }
             
             return false; // Prevent default link behavior
-        }
-        
-        // Hide modal function
-        function hideModal() {
-            const modalOverlay = document.getElementById('solution-modal-overlay');
-            if (modalOverlay) {
-                modalOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    modalOverlay.style.display = 'none';
-                    // Restore scrolling
-                    document.body.style.overflow = '';
-                }, 300);
-                
-                // Restore URL
-                history.pushState(null, '', '#solutions');
-            }
         }
         
         // Check URL for solution detail on page load
