@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa" />
+  
+  <!-- Decorative Wave Pattern -->
+  <path d="M0,400 C200,300 400,500 800,350 L800,600 L0,600 Z" fill="#e6f7ff" />
+  
+  <!-- Circuit Board Base -->
+  <rect x="100" y="100" width="600" height="350" rx="10" ry="10" fill="#0a192f" />
+  
+  <!-- Circuit Paths -->
+  <path d="M150,200 L350,200 L350,300 L650,300" stroke="#00c8ff" stroke-width="4" fill="none" />
+  <path d="M150,250 L300,250 L300,350 L650,350" stroke="#00c8ff" stroke-width="4" fill="none" />
+  <path d="M150,150 L400,150 L400,250 L650,250" stroke="#00c8ff" stroke-width="4" fill="none" />
+  
+  <!-- Connection Points -->
+  <circle cx="350" cy="200" r="8" fill="#00c8ff" />
+  <circle cx="300" cy="250" r="8" fill="#00c8ff" />
+  <circle cx="400" cy="150" r="8" fill="#00c8ff" />
+  <circle cx="650" cy="250" r="8" fill="#00c8ff" />
+  <circle cx="650" cy="300" r="8" fill="#00c8ff" />
+  <circle cx="650" cy="350" r="8" fill="#00c8ff" />
+  
+  <!-- Fiber Optic Cable -->
+  <path d="M100,200 Q400,50 700,200" stroke="#00c8ff" stroke-width="10" fill="none" opacity="0.7" />
+  <path d="M100,200 Q400,50 700,200" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.9" stroke-dasharray="10,15" />
+  
+  <!-- Light Pulses Along Fiber -->
+  <circle cx="200" cy="142" r="12" fill="#00c8ff" opacity="0.8">
+    <animate attributeName="cx" values="150;650" dur="3s" repeatCount="indefinite" />
+    <animate attributeName="cy" values="166;166" dur="3s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
+  </circle>
+  
+  <circle cx="250" cy="125" r="8" fill="#ffffff" opacity="0.8">
+    <animate attributeName="cx" values="200;700" dur="2s" repeatCount="indefinite" />
+    <animate attributeName="cy" values="142;142" dur="2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
+  </circle>
+  
+  <!-- AI/NI Processor -->
+  <rect x="350" y="220" width="100" height="100" rx="10" ry="10" fill="#003366" stroke="#00c8ff" stroke-width="2" />
+  <text x="400" y="275" font-family="Arial" font-size="20" fill="#ffffff" text-anchor="middle">NI</text>
+  
+  <!-- Input/Output Data Streams -->
+  <path d="M250,270 L350,270" stroke="#00c8ff" stroke-width="4" fill="none" marker-end="url(#arrowhead)" />
+  <path d="M450,270 L550,270" stroke="#00c8ff" stroke-width="4" fill="none" marker-end="url(#arrowhead)" />
+  
+  <!-- Define arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#00c8ff" />
+    </marker>
+  </defs>
+  
+  <!-- Signal Processing Indicators -->
+  <g transform="translate(250,270)">
+    <rect x="-15" y="-15" width="30" height="30" fill="#0a192f" stroke="#00c8ff" stroke-width="2" rx="5" ry="5" />
+    <line x1="-7" y1="0" x2="7" y2="0" stroke="#00c8ff" stroke-width="2" />
+    <line x1="0" y1="-7" x2="0" y2="7" stroke="#00c8ff" stroke-width="2" />
+  </g>
+  
+  <g transform="translate(550,270)">
+    <rect x="-15" y="-15" width="30" height="30" fill="#0a192f" stroke="#00c8ff" stroke-width="2" rx="5" ry="5" />
+    <path d="M-7,-7 L7,7 M-7,7 L7,-7" stroke="#00c8ff" stroke-width="2" />
+  </g>
+  
+  <!-- Data Visualization Screens -->
+  <rect x="150" y="350" width="120" height="70" rx="5" ry="5" fill="#003366" stroke="#00c8ff" stroke-width="2" />
+  <path d="M160,370 L260,370 M160,390 L220,390 M160,410 L240,410" stroke="#00c8ff" stroke-width="2" stroke-linecap="round" />
+  
+  <rect x="530" y="350" width="120" height="70" rx="5" ry="5" fill="#003366" stroke="#00c8ff" stroke-width="2" />
+  <path d="M540,380 Q570,350 600,380 Q630,410 660,380" stroke="#00c8ff" stroke-width="2" fill="none" />
+  
+  <!-- Glowing Effect -->
+  <circle cx="400" cy="270" r="140" fill="url(#glow)" opacity="0.15" />
+  
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#00c8ff" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+  </defs>
+</svg>
